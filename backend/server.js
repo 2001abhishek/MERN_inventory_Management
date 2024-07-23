@@ -3,14 +3,30 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const userRoute = require("./routes/userRoute")
 
 const app = express();
+
+//Middlewares
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+//Route Middleware
+app.use("/api/users",userRoute)
+
+//Routes
+app.get("/", (req, res) =>{
+    res.send("Home Page")
+
+});
 
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
-
-mongoose
+//Mongoose already install -> there is problem with the .env file i guess
+//hmm -> can you fix it? there is error in package-lock.json -> go and fix it
+mongoose 
     .connect(process.env.MONGO_URI)
     .then(() => {
         app.listen(PORT, () => {
