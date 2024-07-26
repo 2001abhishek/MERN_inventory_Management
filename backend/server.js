@@ -24,13 +24,12 @@ app.get("/", (req, res) =>{
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
-//Mongoose already install -> there is problem with the .env file i guess
-//hmm -> can you fix it? there is error in package-lock.json -> go and fix it
+
 mongoose 
     .connect(process.env.MONGO_URI)
     .then(() => {
         app.listen(PORT, () => {
-            console.log('Server Running on Port ${PORT}')
+            console.log(`Server Running on Port ${PORT}`)
         });
     })
     .catch((err) => console.log(err))
